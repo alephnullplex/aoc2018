@@ -2,7 +2,7 @@ with open('./input.txt') as f:
     all = [int(x) for x in f.readlines()]
 
     # Part 1 is to calculate the final frequency from all the variations
-    print("The total frequency is {}".format(sum(all)))
+    print("Total frequency: ", sum(all))
 
     # Part 2 is to detect the first duplicate frequency when cycling throught the variations
     # It might take many cycles of the whole list to find the first duplicate frequency
@@ -17,5 +17,4 @@ with open('./input.txt') as f:
                 break
             seen.add(running_total)
 
-
-    print("Duplicate frequency is {}".format(duplicate))
+    print("Duplicate frequency: ", duplicate)

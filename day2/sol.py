@@ -1,33 +1,39 @@
 from collections import Counter
-import editdistance
 
-with open("./input.txt") as input:
-    all = [v.strip() for v in input.readlines()]
-    all.sort()
+def find_off_by(distance, list):
+    """ Uses the Hamming algorithm to find the first pair with a difference of `distance` """
+    for i in range(len(list)):
+        for j in range(i, len(list)):
+            if sum(ca != cb for ca, cb in zip(list[i], list[j])) == distance:
+                return (list[i], list[j])
 
+def checksum(input):
+    """ Checksum by counting items that have duplicates and/or triplicates and multiplying"""
     checksum_twos = 0
     checksum_threes = 0
 
-    for id in all:
+    for id in input:
         c = [v for k,v in Counter(id).items()]
         if 2 in c:
             checksum_twos += 1
         if 3 in c:
             checksum_threes += 1
+    
+    return checksum_threes * checksum_twos
 
-    print("Checksum: {}".format(checksum_threes * checksum_twos))
 
-    found_edit = None
-    for this_one in all:
-        for test in all:
-            if editdistance.eval(this_one, test) == 1:
-                found_edit = (this_one, test)
-                break
+with open("./input.txt") as input:
+    all = [v.strip() for v in input.readlines()]
+    all.sort()
 
-    a, b = found_edit
+    print("Checksum: {}".format(checksum(all)))
+
+    a, b = find_off_by(1, all)
     final = "".join([a[i] for i in range(len(a)) if a[i] == b[i]])
 
-    print("Final: ", final)
+    print("Matching id: ", final)
+
+
             
         
                 
