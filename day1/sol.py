@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 with open('./input.txt') as f:
     all = [int(x) for x in f.readlines()]
 

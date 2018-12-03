@@ -4,8 +4,6 @@ import re
 from collections import Counter
 
 with open("./input.txt") as input:
-    claims = input.readlines()
-
     # some consts for easier indexing
     ID = 0
     X = 1
@@ -17,7 +15,7 @@ with open("./input.txt") as input:
     # just grab the numbers and ditch all the punctiation
     # [id, x, y, width, height]
     claims = [list(map(int, re.findall(r"[\d]+", c))) 
-                 for c in claims]
+                 for c in  input.readlines()]
     
     # this is pretty brute force
     # it creates a list of every co-ordinate in every claim

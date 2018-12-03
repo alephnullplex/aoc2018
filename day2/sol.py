@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from collections import Counter
 
 def find_off_by(distance, list):
