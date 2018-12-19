@@ -43,4 +43,16 @@ def square3():
                 current_max = (a, (x+1,y+1))
     return current_max
 
+def square():
+    grid = summedAreaPowerGrid()
+    current_max = (0, (1,1))
+    for s in range(0, max_xy):
+        for x in range(0, max_xy-s):
+            for y in range(0, max_xy-s):
+                a = summedArea(x, y, s, grid)
+                if a > current_max[0]:
+                    current_max = (a, (x+1,y+1,s))
+    return current_max
+
 print("Largest 3x3 cell: ", square3()[1])
+print("Largest cell: ", square()[1])
