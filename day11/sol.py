@@ -29,16 +29,18 @@ def summedAreaPowerGrid():
             grid[(x,y)] = summedAreaVal(x, y, serial, grid)
     return grid
 
-def summedArea9(x, y, grid):
-    return grid[(x+3, y+3)] + grid[(x,y)] - grid[(x+3, y)] - grid[(x, y+3)]
+def summedArea(x, y, s, grid):
+    return grid[(x+s, y+s)] + grid[(x,y)] - grid[(x+s, y)] - grid[(x, y+s)]
 
 
-grid = summedAreaPowerGrid()
-current_max = (0, (1,1))
-for x in range(0, max_xy-3):
-    for y in range(0, max_xy-3):
-       a = summedArea9(x, y, grid)
-       if a > current_max[0]:
-           current_max = (a, (x+1,y+1))
+def square3():
+    grid = summedAreaPowerGrid()
+    current_max = (0, (1,1))
+    for x in range(0, max_xy-3):
+        for y in range(0, max_xy-3):
+            a = summedArea(x, y, 3, grid)
+            if a > current_max[0]:
+                current_max = (a, (x+1,y+1))
+    return current_max
 
-print("Largest cell: ", current_max[1])
+print("Largest 3x3 cell: ", square3()[1])
