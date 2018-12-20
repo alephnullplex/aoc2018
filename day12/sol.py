@@ -53,23 +53,27 @@ def partOne(lines):
     counter, game_state = checkBounds(0, parseInitialState(lines[0]))
     rules = [parseRule(l.strip()) for l in lines[2:]]
 
-    print(0, ": ", "".join(['#' if x else '.' for x in game_state]))
-    for i in range(1, 21):
+    gen = 1
+    gap = 0
+    last_val = 0
+
+    while True:
         counter, game_state = checkBounds(counter, generation(game_state, rules))
-        print(i, ": ", "".join(['#' if x else '.' for x in game_state]))
-
-    print("Sum of pots:", sumPots(counter, game_state))
-
-def partTwo(lines):
-    counter, game_state = checkBounds(0, parseInitialState(lines[0]))
-    rules = [parseRule(l.strip()) for l in lines[2:]]
-
-    current_value = sumPots(counter, game_state)
-
-    print(current_value)
+        val = sumPots(counter, game_state)
+        diff = val - last_val
+        if gen == 20:
+            print("Sum of pots at :", gen, val)
+        
+        if diff == gap:
+            print("Sum of pots at 50B :", val + (diff * (50000000000 - gen)))
+            break
+        
+        gap = diff
+        last_val = val
+        gen += 1
+        
 
 with open('input.txt') as input:
     lines = input.readlines()
 
-#partOne(lines)
-partTwo(lines)
+partOne(lines)
