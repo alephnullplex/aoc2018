@@ -60,8 +60,16 @@ def partOne(lines):
 
     print("Sum of pots:", sumPots(counter, game_state))
 
+def partTwo(lines):
+    counter, game_state = checkBounds(0, parseInitialState(lines[0]))
+    rules = [parseRule(l.strip()) for l in lines[2:]]
+
+    current_value = sumPots(counter, game_state)
+
+    print(current_value)
+
 with open('input.txt') as input:
     lines = input.readlines()
 
-partOne(lines)
-
+#partOne(lines)
+partTwo(lines)
